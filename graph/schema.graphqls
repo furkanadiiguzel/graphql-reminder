@@ -3,36 +3,36 @@
 # https://gqlgen.com/getting-started/
 
 type reminderListing{
-  _id ID!,
-  title: String!,
-  description: String!,
-  date: Date!
+  _id: ID!
+  title: String!
+  description: String!
+  date: String!
 }
 
 
 type Query{
   reminers: [reminderListing!]!
-  reminder(id: ID!) reminderListing!
+  reminder(id: ID!): reminderListing!
 }
 
 type Mutation {
   createReminderListing(input: CreateReminderListingInput!): reminderListing!
   updateReminderListing(id: ID!, input: updateReminderListingInput!): reminderListing!
-  deleteReminderListing(id: ID!), deleteReminderResponse!
+  deleteReminderListing(id: ID!): deleteReminderResponse!
 }
 
 input CreateReminderListingInput{
-  title:String!
-  description:String!
-  date: Date!
+  title: String!
+  description: String!
+  date: String!
 }
 
 input updateReminderListingInput{
   title:String!
   description:String!
-  date: Date!
+  date: String!
 }
 
-input deleteReminderResponse{
+type deleteReminderResponse{
   deleteReminderId: String!
 }

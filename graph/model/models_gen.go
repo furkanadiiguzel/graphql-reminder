@@ -2,3 +2,25 @@
 
 package model
 
+type CreateReminderListingInput struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Date        string `json:"date"`
+}
+
+type DeleteReminderResponse struct {
+	DeleteReminderID string `json:"deleteReminderId"`
+}
+
+type ReminderListing struct {
+	ID          string `json:"_id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Date        string `json:"date"`
+}
+
+type UpdateReminderListingInput struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Date        string `json:"date"`
+}
