@@ -2,38 +2,37 @@
 #
 # https://gqlgen.com/getting-started/
 
-type JobListing {
-  _id: ID!
-  title: String!
-  description: String!
-  company: String!
-  url: String!
+type reminderListing{
+  _id ID!,
+  title: String!,
+  description: String!,
+  date: Date!
 }
 
-type Query {
-  jobs: [JobListing!]!
-  job(id: ID!): JobListing!
+
+type Query{
+  reminers: [reminderListing!]!
+  reminder(id: ID!) reminderListing!
 }
 
 type Mutation {
-  createJobListing(input: CreateJobListingInput!): JobListing!
-  updateJobListing(id: ID!, input: UpdateJobListingInput!): JobListing!
-  deleteJobListing(id: ID!): DeleteJobResponse!
+  createReminderListing(input: CreateReminderListingInput!): reminderListing!
+  updateReminderListing(id: ID!, input: updateReminderListingInput!): reminderListing!
+  deleteReminderListing(id: ID!), deleteReminderResponse!
 }
 
-input CreateJobListingInput {
-  title: String!
-  description: String!
-  company: String!
-  url: String!
+input CreateReminderListingInput{
+  title:String!
+  description:String!
+  date: Date!
 }
 
-input UpdateJobListingInput {
-  title: String
-  description: String
-  url: String
+input updateReminderListingInput{
+  title:String!
+  description:String!
+  date: Date!
 }
 
-type DeleteJobResponse {
-  deletedJobId: String!
+input deleteReminderResponse{
+  deleteReminderId: String!
 }
