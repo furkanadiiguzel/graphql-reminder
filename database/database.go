@@ -28,11 +28,11 @@ func Connect() *DB {
 
 	return &DB{client: client}
 }
-func (db *DB) getReminder(id string) *model.ReminderListing {
+func (db *DB) GetReminder(id string) *model.ReminderListing {
 	var reminderListing model.ReminderListing
 	return &reminderListing
 }
-func (db *DB) getReminders() []*model.ReminderListing {
+func (db *DB) GetReminders() []*model.ReminderListing {
 	var reminderListings []*model.ReminderListing
 	return reminderListings
 }

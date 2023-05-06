@@ -30,15 +30,14 @@ func (r *mutationResolver) DeleteReminderListing(ctx context.Context, id string)
 }
 
 // Reminers is the resolver for the reminers field.
-func (r *queryResolver) Reminers(ctx context.Context) ([]*model.ReminderListing, error) {
-
-	return db.getReminders(), nil
+func (r *queryResolver) Reminders(ctx context.Context) ([]*model.ReminderListing, error) {
+	return db.GetReminders(), nil
 
 }
 
 // Reminder is the resolver for the reminder field.
 func (r *queryResolver) Reminder(ctx context.Context, id string) (*model.ReminderListing, error) {
-	return db.getReminder(id), nil
+	return db.GetReminder(id), nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
