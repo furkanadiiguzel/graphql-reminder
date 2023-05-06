@@ -15,7 +15,7 @@ var db = database.Connect()
 
 // CreateReminderListing is the resolver for the createReminderListing field.
 func (r *mutationResolver) CreateReminderListing(ctx context.Context, input model.CreateReminderListingInput) (*model.ReminderListing, error) {
-	return db.CreateReminderListing(input), nil
+	 return db.CreateReminderListing(input), nil
 
 // UpdateReminderListing is the resolver for the updateReminderListing field.
 func (r *mutationResolver) UpdateReminderListing(ctx context.Context, id string, input model.UpdateReminderListingInput) (*model.ReminderListing, error) {
