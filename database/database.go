@@ -21,9 +21,9 @@ func Connect() *DB {
 	}
 	defer db.Close()
 	return &DB{client: db}
-
 }
 func (db *DB) GetReminder(id string) *model.ReminderListing {
+
 	var reminderListing model.ReminderListing
 	return &reminderListing
 }
