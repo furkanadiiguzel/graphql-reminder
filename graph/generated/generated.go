@@ -51,8 +51,8 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		Reminder func(childComplexity int, id string) int
-		Reminers func(childComplexity int) int
+		Reminder  func(childComplexity int, id string) int
+		Reminders func(childComplexity int) int
 	}
 
 	DeleteReminderResponse struct {
@@ -73,7 +73,7 @@ type MutationResolver interface {
 	DeleteReminderListing(ctx context.Context, id string) (*model.DeleteReminderResponse, error)
 }
 type QueryResolver interface {
-	Reminers(ctx context.Context) ([]*model.ReminderListing, error)
+	Reminders(ctx context.Context) ([]*model.ReminderListing, error)
 	Reminder(ctx context.Context, id string) (*model.ReminderListing, error)
 }
 
@@ -140,12 +140,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Query.Reminder(childComplexity, args["id"].(string)), true
 
-	case "Query.reminers":
-		if e.complexity.Query.Reminers == nil {
+	case "Query.reminders":
+		if e.complexity.Query.Reminders == nil {
 			break
 		}
 
-		return e.complexity.Query.Reminers(childComplexity), true
+		return e.complexity.Query.Reminders(childComplexity), true
 
 	case "deleteReminderResponse.deleteReminderId":
 		if e.complexity.DeleteReminderResponse.DeleteReminderID == nil {
@@ -265,7 +265,7 @@ type reminderListing{
 
 
 type Query{
-  reminers: [reminderListing!]!
+  reminders: [reminderListing!]!
   reminder(id: ID!): reminderListing!
 }
 
@@ -608,8 +608,8 @@ func (ec *executionContext) fieldContext_Mutation_deleteReminderListing(ctx cont
 	return fc, nil
 }
 
-func (ec *executionContext) _Query_reminers(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Query_reminers(ctx, field)
+func (ec *executionContext) _Query_reminders(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_reminders(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -622,7 +622,7 @@ func (ec *executionContext) _Query_reminers(ctx context.Context, field graphql.C
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Reminers(rctx)
+		return ec.resolvers.Query().Reminders(rctx)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -639,7 +639,7 @@ func (ec *executionContext) _Query_reminers(ctx context.Context, field graphql.C
 	return ec.marshalNreminderListing2ᚕᚖgithubᚗcomᚋfurkanadiiguzelᚋgraphqlᚑreminderᚋgraphᚋmodelᚐReminderListingᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Query_reminers(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Query_reminders(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Query",
 		Field:      field,
@@ -3021,7 +3021,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
-		case "reminers":
+		case "reminders":
 			field := field
 
 			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
@@ -3030,7 +3030,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_reminers(ctx, field)
+				res = ec._Query_reminders(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&invalids, 1)
 				}

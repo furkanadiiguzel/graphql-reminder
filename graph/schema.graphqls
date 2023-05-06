@@ -11,7 +11,7 @@ type reminderListing{
 
 
 type Query{
-  reminers: [reminderListing!]!
+  reminders: [reminderListing!]!
   reminder(id: ID!): reminderListing!
 }
 
