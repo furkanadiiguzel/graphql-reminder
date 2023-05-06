@@ -13,6 +13,8 @@ import (
 	"github.com/furkanadiiguzel/graphql-reminder/graph/model"
 )
 
+var db = database.Connect()
+
 // CreateReminderListing is the resolver for the createReminderListing field.
 func (r *mutationResolver) CreateReminderListing(ctx context.Context, input model.CreateReminderListingInput) (*model.ReminderListing, error) {
 	return db.CreateReminderListing(input), nil
@@ -46,15 +48,3 @@ func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
-
-// !!! WARNING !!!
-// The code below was going to be deleted when updating resolvers. It has been copied here so you have
-// one last chance to move it out of harms way if you want. There are two reasons this happens:
-//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
-//     it when you're done.
-//   - You have helper methods in this file. Move them out to keep these resolver files clean.
-var db = database.Connect()
-
-func (r *queryResolver) Reminders(ctx context.Context) ([]*model.ReminderListing, error) {
-	return db.GetReminders(), nil
-}
