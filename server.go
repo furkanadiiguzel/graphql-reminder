@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -14,27 +13,21 @@ import (
 const defaultPort = "8080"
 
 func main() {
-
-	// Load environment variables from the "database.env" file.
-	err := godotenv.Load("database.env")
+	// Load environment variables from the ".env" file.
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading database.env file:", err)
+		log.Fatal("Error loading .env file:", err)
 	}
 
-	// Get the database connection settings from environment variables.
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
-
-	// Construct the database connection URL.
-	dbURL := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", dbUser, dbPassword, dbHost, dbPort, dbName)
+	// Get the database connection URL from environment variables.
+	dbURL := os.Getenv("DB_URL")
 
 	// Connect to the database.
 	Database := graph.Connect(dbURL)
 
+	// Create the GraphQL server with the connected database.
 	srv := handler.NewDefaultServer(
 		generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{DB: Database}}))
 
+	// ...
 }
